@@ -1,0 +1,227 @@
+<button (click)="onDeleteSection('section_id_to_delete')">Delete Section</button>
+
+<button (click)="onUpdateSection('section_id_to_update', updatedUser)">Update Section</button>
+
+
+<table>
+    <thead>
+      <tr>
+        
+        <th>Organization ID</th>
+        <th>Organization Title</th>
+        <th>Organization Description</th>
+        <th>Organization Logo URL</th>
+        <th>Organization Primary</th>
+        <th>Organization Establish Date</th>
+        <th>Organization Phone</th>
+        <th>Organization Address</th>
+        <th>Organization Website</th>
+        <th>Division ID</th>
+        <th>Division Title</th>
+        <th>Department ID</th>
+        <th>Department Title</th>
+        <th>Section ID</th>
+        <th>Section Title</th>
+        <th>Language ID</th>
+        <th>Language Type</th>
+        <th>Language Code</th>
+        <th>Language Title</th>
+        <th>Language Primary</th>
+        <th>Language RTL</th>
+        <th>Designation ID</th>
+        <th>Designation Level ID</th>
+        <th>Designation Grade ID</th>
+        <th>Designation Zone ID</th>
+        <th>Designation Previous ID</th>
+        <th>Designation CEO</th>
+        <th>Designation Super Admin</th>
+        <th>Designation Code</th>
+        <th>Designation Title</th>
+        <th>Designation Order</th>
+        <th>Designation Created At</th>
+        <th>Designation Updated At</th>
+        <th>Designation Created By</th>
+        <th>Designation Updated By</th>
+        <th>Designation Status ID</th>
+        <th>Designation External System Reference ID</th>
+        <th>Designation Review User</th>
+        <th>Settings ID</th>
+        <th>Settings User ID</th>
+        <th>Settings Default Language ID</th>
+        <th>Settings Two Factor Auth Enabled</th>
+        <th>Settings Timezone ID</th>
+        <th>Settings OTP</th>
+        <th>Settings OTP Generated At</th>
+        <th>Settings Autolock</th>
+        <th>Settings Autolock Seconds</th>
+        <th>Settings Created At</th>
+        <th>Settings Updated At</th>
+        <th>Settings Created By</th>
+        <th>Settings Updated By</th>
+        <th>Settings Language ID</th>
+        <th>Settings Timezone</th>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Personal Email</th>
+        <th>Mobile</th>
+        <th>Office Number</th>
+        <th>LDAP Username</th>
+        <th>Image URL</th>
+        <th>Image Title</th>
+        <th>Image Size</th>
+        <th>Image Extension</th>
+        <th>Image Token</th>
+        <th>Address ID</th>
+        <th>Address User ID</th>
+        <th>Address Country ID</th>
+        <th>Address Type</th>
+        <th>Address Address</th>
+        <th>Address Street</th>
+        <th>Address City</th>
+        <th>Address State</th>
+        <th>Address Zip</th>
+        <th>Address Contact</th>
+        <th>Address Relative Name</th>
+        <th>Address Relationship</th>
+        <th>Address Relative Mobile</th>
+        <th>Address Created At</th>
+        <th>Address Updated At</th>
+        <th>Address Created By</th>
+        <th>Address Updated By</th>
+        <th>Address Country</th>
+        <th>Role ID</th>
+        <th>Role Type</th>
+        <th>Role Title</th>
+        <th>Role Created At</th>
+        <th>Role Updated At</th>
+        <th>Role Created By ID</th>
+        <th>Role Updated By ID</th>
+        
+        <th>Status ID</th>
+        <th>Status Title</th>
+        <th>Status Label</th>
+        <th>Status Is Active</th>
+        <th>Status Is Inactive</th>
+        <th>Date of Birth</th>
+        <th>National Insurance Number</th>
+        <th>Joining Date</th>
+        <th>Leaving Date</th>
+        <th>Is License Active</th>
+        <th>Is Top User</th>
+        <th>Is Auditor</th>
+        <th>Is Section Head</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of users">
+        
+        <td>{{ data.organization.id }}</td>
+        <td>{{ data.organization.title }}</td>
+        <td>{{ data.organization.description }}</td>
+        <td>{{ data.organization.logo_url }}</td>
+        <td>{{ data.organization.is_primary }}</td>
+        <td>{{ data.organization.establish_date }}</td>
+        <td>{{ data.organization.phone }}</td>
+        <td>{{ data.organization.address }}</td>
+        <td>{{ data.organization.website }}</td>
+        <td>{{ data.division.id }}</td>
+        <td>{{ data.division.title }}</td>
+        <td>{{ data.department.id }}</td>
+        <td>{{ data.department.title }}</td>
+        <td>{{ data.section.id }}</td>
+        <td>{{ data.section.title }}</td>
+        <td>{{ data.language.id }}</td>
+        <td>{{ data.language.type }}</td>
+        <td>{{ data.language.code }}</td>
+        <td>{{ data.language.title }}</td>
+        <td>{{ data.language.is_primary }}</td>
+        <td>{{ data.language.is_rtl }}</td>
+        <td>{{ data.designation.id }}</td>
+        <td>{{ data.designation.designation_level_id }}</td>
+        <td>{{ data.designation.designation_grade_id }}</td>
+        <td>{{ data.designation.designation_zone_id }}</td>
+        <td>{{ data.designation.previous_designation_id }}</td>
+        <td>{{ data.designation.is_ceo }}</td>
+        <td>{{ data.designation.is_super_admin }}</td>
+        <td>{{ data.designation.code }}</td>
+        <td>{{ data.designation.title }}</td>
+        <td>{{ data.designation.order }}</td>
+        <td>{{ data.designation.created_at }}</td>
+        <td>{{ data.designation.updated_at }}</td>
+        <td>{{ data.designation.created_by }}</td>
+        <td>{{ data.designation.updated_by }}</td>
+        <td>{{ data.designation.status_id }}</td>
+        <td>{{ data.designation.external_system_reference_id }}</td>
+        <td>{{ data.designation.is_review_user }}</td>
+        <td>{{ data.settings.id }}</td>
+        <td>{{ data.settings.user_id }}</td>
+        <td>{{ data.settings.default_language_id }}</td>
+        <td>{{ data.settings.is_two_factor_auth_enabled }}</td>
+        <td>{{ data.settings.timezone_id }}</td>
+        <td>{{ data.settings.otp }}</td>
+        <td>{{ data.settings.otp_generated_at }}</td>
+        <td>{{ data.settings.is_autolock }}</td>
+        <td>{{ data.settings.autolock_seconds }}</td>
+        <td>{{ data.settings.created_at }}</td>
+        <td>{{ data.settings.updated_at }}</td>
+        <td>{{ data.settings.created_by }}</td>
+        <td>{{ data.settings.updated_by }}</td>
+        <td>{{ data.settings.language.id }}</td>
+        <td>{{ data.settings.timezone }}</td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.last_name }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.personal_email }}</td>
+        <td>{{ data.mobile }}</td>
+        <td>{{ data.office_number }}</td>
+        <td>{{ data.ldap_username }}</td>
+        <td>{{ data.image_url }}</td>
+        <td>{{ data.image_title }}</td>
+        <td>{{ data.image_size }}</td>
+        <td>{{ data.image_ext }}</td>
+        <td>{{ data.image_token }}</td>
+        <td>{{ data.address[0].id }}</td>
+        <td>{{ data.address[0].user_id }}</td>
+        <td>{{ data.address[0].country_id }}</td>
+        <td>{{ data.address[0].type }}</td>
+        <td>{{ data.address[0].address }}</td>
+        <td>{{ data.address[0].street }}</td>
+        <td>{{ data.address[0].city }}</td>
+        <td>{{ data.address[0].state }}</td>
+        <td>{{ data.address[0].zip }}</td>
+        <td>{{ data.address[0].contact }}</td>
+        <td>{{ data.address[0].relative_name }}</td>
+        <td>{{ data.address[0].relationship }}</td>
+        <td>{{ data.address[0].relative_mobile }}</td>
+        <td>{{ data.address[0].created_at }}</td>
+        <td>{{ data.address[0].updated_at }}</td>
+        <td>{{ data.address[0].created_by }}</td>
+        <td>{{ data.address[0].updated_by }}</td>
+        <td>{{ data.address[0].country }}</td>
+        <td>{{ data.roles[0].id }}</td>
+        <td>{{ data.roles[0].type }}</td>
+        <td>{{ data.roles[0].title }}</td>
+        <td>{{ data.roles[0].created_at }}</td>
+        <td>{{ data.roles[0].updated_at }}</td>
+        <td>{{ data.roles[0].created_by.id }}</td>
+        <td>{{ data.roles[0].updated_by.id }}</td>
+       
+        <td>{{ data.status.id }}</td>
+        <td>{{ data.status.title[0].title }}</td>
+        <td>{{ data.status.label }}</td>
+        <td>{{ data.status.is_active }}</td>
+        <td>{{ data.status.is_inactive }}</td>
+        <td>{{ data.date_of_birth }}</td>
+        <td>{{ data.national_insurance_number }}</td>
+        <td>{{ data.joining_date }}</td>
+        <td>{{ data.leaving_date }}</td>
+        <td>{{ data.is_license_active }}</td>
+        <td>{{ data.is_top_user }}</td>
+        <td>{{ data.is_auditor }}</td>
+        <td>{{ data.is_section_head }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+ 

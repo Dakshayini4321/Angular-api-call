@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { User } from '../user';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { User, User2, User3 } from '../user';
 import { UserService } from '../user.service';
 import { HttpClient } from '@angular/common/http';
 import { FormControl,ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { log } from 'console';
-import { response } from 'express';
 
 
 @Component({
@@ -20,15 +18,32 @@ export class AddeditComponent implements OnInit{
   
   userForm: any;
   toastMessage: any;
+  userData: any;
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder) { }
+  users1: User2[] = [];
+  id: any;
+  UId!: any;
+  userId: string | null = null;
+  
+
+  constructor(   private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService,) { }
+
+
+    
 
   ngOnInit(): void {
+
+    this.userId=this.route.snapshot.paramMap.get(this.id);
+
+
     this.userForm = this.formBuilder.group({
       
-        first_name: ['abc', Validators.required],
-        last_name: ['def', Validators.required],
-        email: ['mhs@gmail.com', [Validators.required, Validators.email]],
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
         personal_email: [''],
         mobile: [''],
         office_number: [''],
@@ -37,8 +52,8 @@ export class AddeditComponent implements OnInit{
         division_id: [1, Validators.required],
         section_id: [1, Validators.required],
         designation_id: [1, Validators.required],
-        pwd: ['abcdef', Validators.required],
-        pwd_confirm: ['abcdef', Validators.required],
+        pwd: ['', Validators.required],
+        pwd_confirm: ['', Validators.required],
         addresses: this.formBuilder.group({
           contact: this.formBuilder.group({
             address: [''],
@@ -77,23 +92,57 @@ export class AddeditComponent implements OnInit{
         leaving_date: [''],
         is_license_active: [true]
       });
+
+      this.route.params.subscribe(params => {
+        this.id = params['id'];
+        if (this.id) {
+         
+          this.userService.getUser(this.id).subscribe((userData: any) => {
+
+userData.first_name = userData.name;
+
+            this.userForm.patchValue(userData); 
+          });
+        }
+      });
    
   }
 
   onSubmit(): void {
     if (this.userForm.valid) {
-      const user: User = this.userForm.value;
-      this.userService.create(user).subscribe(
-        (data: any) => {
-          console.log('Added successfully'); 
+      const userData = this.userForm.value;
+      const userId = this.route.snapshot.paramMap.get('id');
+      
+      const apiCall = userId ? this.userService.update(this.id, userData) : this.userService.create(userData);
+
+      apiCall.subscribe(
+        () => {
+          console.log('User data saved successfully');
+          this.router.navigate(['user/userm/list']);
         },
-        (error: any) => {
-          console.error(error); 
+        (error) => {
+          console.error('Error saving user data:', error);
+          if (error.error && error.error.errors) {
+            // Handle errors from the server and bind to form fields
+            this.handleFormErrors(error.error.errors);
+          } else {
+            this.toastMessage = 'An error occurred while saving user data.';
+          }
         }
       );
-    } else {
-     
     }
-    
   }
-}
+
+  // Function to bind server-side errors to form fields
+  handleFormErrors(errors: any): void {
+    for (const fieldName of Object.keys(errors)) {
+      const formControl = this.userForm.get(fieldName);
+      if (formControl) {
+        formControl.setErrors({ serverError: errors[fieldName].join(', ') });
+      }
+    }
+  }
+    }
+  
+
+

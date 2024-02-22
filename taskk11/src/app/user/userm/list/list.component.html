@@ -1,108 +1,49 @@
 <table>
     <thead>
       <tr>
-        <th>Image</th>
+        <th>Id</th>
+       
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
-        <th>Personal Email</th>
-        <th>Mobile</th>
-        <th>Office Number</th>
-        <th>Organization ID</th>
-        <th>Department ID</th>
-        <th>Division ID</th>
-        <th>Section ID</th>
-        <th>Designation ID</th>
-        <th>Password</th>
-        <th>Password Confirm</th>
-        <th>Contact Address</th>
-        <th>Contact Street</th>
-        <th>Contact State</th>
-        <th>Contact City</th>
-        <th>Contact Zip</th>
-        <th>Contact Info</th>
-        <th>Emergency Relative Name</th>
-        <th>Emergency Relationship</th>
-        <th>Emergency Address</th>
-        <th>Emergency Relative Mobile</th>
-        <th>Address</th>
-        <th>Street</th>
-        <th>State</th>
-        <th>City</th>
-        <th>Country ID</th>
-        <th>Zip</th>
-        <th>Contact</th>
-        <th>Relative Name</th>
-        <th>Relationship</th>
-        <th>Relative Mobile</th>
-        <th>Relative Address</th>
-        <th>Role IDs</th>
-        <th>Is Auditor</th>
-        <th>Is Top User</th>
-        <th>Is Send Welcome</th>
-        <th>Date of Birth</th>
-        <th>National Insurance Number</th>
-        <th>Joining Date</th>
-        <th>Leaving Date</th>
-        <th>Is License Active</th>
+       
+      
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
-        <td><img [src]="user.image || 'default_image_url'" alt="User Image"></td>
+      <tr *ngFor="
+      let user of users
+        | paginate
+        
+          : {
+              itemsPerPage: 10,
+              currentPage: pagination,
+              totalItems: allUsers
+            }
+    ">
+        <td>{{ user.id }}</td>
+        
         <td>{{ user.first_name }}</td>
         <td>{{ user.last_name }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.personal_email }}</td>
-        <td>{{ user.mobile }}</td>
-        <td>{{ user.office_number }}</td>
-        <td>{{ user.organization_id }}</td>
-        <td>{{ user.department_id }}</td>
-        <td>{{ user.division_id }}</td>
-        <td>{{ user.section_id }}</td>
-        <td>{{ user.designation_id }}</td>
-        <td>{{ user.pwd }}</td>
-        <td>{{ user.pwd_confirm }}</td>
-        <td>{{ user.addresses?.contact?.address }}</td>
-        <td>{{ user.addresses?.contact?.street }}</td>
-        <td>{{ user.addresses?.contact?.state }}</td>
-        <td>{{ user.addresses?.contact?.city }}</td>
-        <td>{{ user.addresses?.contact?.zip }}</td>
-        <td>{{ user.addresses?.contact?.contact }}</td>
-        <td>{{ user.addresses?.emergency?.relative_name }}</td>
-        <td>{{ user.addresses?.emergency?.relationship }}</td>
-        <td>{{ user.addresses?.emergency?.address }}</td>
-        <td>{{ user.addresses?.emergency?.relative_mobile }}</td>
-        <td>{{ user.address }}</td>
-        <td>{{ user.street }}</td>
-        <td>{{ user.state }}</td>
-        <td>{{ user.city }}</td>
-        <td>{{ user.country_id }}</td>
-        <td>{{ user.zip }}</td>
-        <td>{{ user.contact }}</td>
-        <td>{{ user.relative_name }}</td>
-        <td>{{ user.relationship }}</td>
-        <td>{{ user.relative_mobile }}</td>
-        <td>{{ user.relative_address }}</td>
-        <td>{{ user.role_ids }}</td>
-        <td>{{ user.is_auditor }}</td>
-        <td>{{ user.is_top_user }}</td>
-        <td>{{ user.is_send_welcome }}</td>
-        <td>{{ user.date_of_birth }}</td>
-        <td>{{ user.national_insurance_number }}</td>
-        <td>{{ user.joining_date }}</td>
-        <td>{{ user.leaving_date }}</td>
-        <td>{{ user.is_license_active }}</td>
+       
+       
+        <td>
+          <button (click)="deleteUser($event, user.id)">Delete</button>
+         <button routerLink="/user/userm/list/{{user.id}}/addedit">Edit</button>
+          <button routerLink="/user/userm/list/{{user.id}}/details">Details</button>
+        </td>
       </tr>
     </tbody>
   
   </table>
 
-  
-  <div>
-    
-    <button [disabled]="currentPage === 2" (click)="previousPage()">Previous</button>
-    
-    <button [disabled]="currentPage === totalPages" (click)="nextPage()">Next</button>
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      (pageChange)="renderPage($event)"
+    ></pagination-controls>
   </div>
+  
+
   
